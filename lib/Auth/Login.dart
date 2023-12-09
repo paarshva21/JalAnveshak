@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:local_auth/local_auth.dart';
-import 'package:jal_anveshak/Auth/SignUp/BuildProfile.dart';
 import 'package:jal_anveshak/constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +13,8 @@ import 'package:jal_anveshak/Models/LogInModel.dart';
 import 'package:jal_anveshak/Models/Utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../Screens/UserPage.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -217,10 +218,10 @@ class _Login extends State<Login> {
                                       ))),
                                   onPressed: () async {
                                     if (formKey.currentState!.validate()) {
-                                      List lst = await LoginGetTokens(
-                                          _emailController.text.trim(),
-                                          _passwordController.text.trim());
-                                      if (lst[0]) {
+                                      // List lst = await LoginGetTokens(
+                                      //     _emailController.text.trim(),
+                                      //     _passwordController.text.trim());
+                                      if (true) {
                                         if (_supportState) {
                                           bool? finger =
                                               await _fingerprintAuthenticate();
@@ -230,21 +231,17 @@ class _Login extends State<Login> {
                                                     .getInstance();
                                             await prefs.setBool(
                                                 'isLoggedIn', true);
-                                            await prefs.setString(
-                                                'name', lst[2]);
-                                            await prefs.setString(
-                                                'token', lst[3]);
-                                            await prefs.setString(
-                                                'userId', lst[5]);
+                                            await prefs.setString('name', "");
+                                            await prefs.setString('token', "");
+                                            await prefs.setString('userId', "");
                                             Navigator.of(context).pop();
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        BuildProfile(
-                                                          name: lst[2],
-                                                          token: lst[3],
-                                                          userId: lst[5],
-                                                        )));
+                                                        const UserPage(
+                                                            token: "",
+                                                            name: "",
+                                                            userId: "")));
                                           }
                                         } else {
                                           Utils.showSnackBar(
@@ -252,7 +249,7 @@ class _Login extends State<Login> {
                                                   .fingerprintAuthMessage);
                                         }
                                       } else {
-                                        Utils.showSnackBar(lst[4]);
+                                        Utils.showSnackBar("Error occurred!");
                                       }
                                     }
                                   },

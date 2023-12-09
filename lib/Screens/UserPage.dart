@@ -1,10 +1,9 @@
-import 'package:jal_anveshak/Screens/Chat/TextInput.dart';
-import 'package:jal_anveshak/Screens/NavBar/Recommendations/Recommendations.dart';
-import 'package:jal_anveshak/Screens/NavBar/Home/RetirementCalculator.dart';
+import 'BottomBar/AudioInput.dart';
+import 'BottomBar/Chat/TextInput.dart';
+import 'BottomBar/OCRInput.dart';
 import 'package:flutter/material.dart';
 import 'package:jal_anveshak/Screens/Drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'NavBar/News/NewsPage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserPage extends StatefulWidget {
@@ -24,13 +23,10 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     super.initState();
-    screens = [
-      Recommendations(
-        userId: widget.userId,
-        token: widget.token,
-      ),
-      RetirementCalculator(name: widget.name, token: widget.token),
-      const FlutterNews(),
+    screens = const [
+    OCRInput(),
+    TextInput(),
+    AudioInput(),
     ];
   }
 
@@ -42,10 +38,7 @@ class _UserPageState extends State<UserPage> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => TextInput(
-                      userId: widget.userId,
-                    )));
+          
           },
           backgroundColor: Colors.cyan[500],
           child: const FaIcon(FontAwesomeIcons.robot),

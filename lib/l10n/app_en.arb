@@ -4,22 +4,22 @@
         "description": "The current Language"
     },
     "proceed": "Proceed",
-    "@proceed": { 
-        "description": "For language dropdown" 
+    "@proceed": {
+        "description": "For language dropdown"
     },
     "chooseLanguage": "Choose a language.",
     "@chooseLanguage": {
         "description": "For language selection"
     },
-    "landingPageOne": "Welcome to the AI driven solution to help you plan your retirement. Let Retiral do your fretting for you.",
+    "landingPageOne": "Welcome to the AI driven solution to help you make your fishing decisions. Let Jal Anveshak do your fretting for you.",
     "@landingPageOne": {
         "description": "For first landing page"
     },
-    "landingPageTwo": "Sit back, put your feet up while our state-of-the-art algorithms secure your future.",
+    "landingPageTwo": "Sit back, put your feet up while our state-of-the-art algorithms secure your catch.",
     "@landingPageTwo": {
         "description": "For second landing page"
     },
-    "landingPageThree": "A few clicks to get various insights on how to pick your ideal retirement life. Doesn't sound too bad, does it?",
+    "landingPageThree": "A few clicks to get various insights on how to pick your ideal fishing spot. Doesn't sound too bad, does it?",
     "@landingPageThree": {
         "description": "For third landing page"
     },
@@ -39,14 +39,14 @@
     "@getStarted": {
         "description": "For get started"
     },
-    "loginCatchphrase": "AI-Powered and Ready to Transform Your Retirement.",
+    "loginCatchphrase": "AI-Powered and Ready to Transform Your Fishing.",
     "@loginCatchphrase": {
         "description": "for Login catchphrase"
     },
     "forgotPassword": "Forgot Password?",
     "@forgotPassword": {
         "description": "For forgot password"
-    }, 
+    },
     "madeAnAcc": "Haven't yet made an account? Click here to",
     "@madeAnAcc": {
         "description": "for signup support"
@@ -71,7 +71,7 @@
     "@resetPass": {
         "description": "For reset pass"
     },
-    "sendEmail": "Send email", 
+    "sendEmail": "Send email",
     "@sendEmail": {
         "description": "For send email"
     },
@@ -91,24 +91,24 @@
     "@fingerprintAuthMessage": {
         "description": "For fingerprint auth message"
     },
-    "retiral": "Retiral",
+    "retiral": "Jal Anveshak",
     "@retiral": {
         "description": "For app title"
     },
     "enterText": "Enter text here.",
-        "@enterText": {
-            "description": "For entering text"
-        },
+    "@enterText": {
+        "description": "For entering text"
+    },
     "enter": "Enter",
     "@enter": {
         "description": "For enter button"
     },
     "home": "Home",
-    "@text": {
+    "@home": {
         "description": "For bottombar home"
     },
     "news": "News",
-    "@audio": {
+    "@news": {
         "description": "For bottombar news"
     },
     "forum": "Forum",
@@ -203,44 +203,32 @@
     "@aboutUs": {
         "description": "For about us"
     },
-    "resolveYourQueries": "Resolve your financial queries.",
-    "@resolveYourQueries": {
-        "description": "For resolving your financial queries."
+    "yourHistory": "Your History",
+    "@yourHistory": {
+        "description": "For your history"
     },
-    "buildProfile": "Build your initial profile",
-    "@buildProfile": {
-        "description": "For building profile"
+    "text": "Text",
+    "@text": {
+        "description": "For bottombar text"
     },
-    "knowMore": "Know More",
-    "@knowMore": {
-        "description": "For knowing more"
+    "audio": "Audio",
+    "@audio": {
+        "description": "For bottombar audio"
     },
-    "connect": "Connect with a personalised message.",
-    "@connect": {
-        "description": "For knowing more"
+    "camera": "Camera",
+    "@camera": {
+        "description": "For bottombar camera"
     },
-    "getPlans": "Get Plans",
-    "@getPlans": {
-        "description": "For getting plans"
+    "useCamera": "Use Camera",
+    "@useCamera": {
+        "description": "For using camera"
     },
-    "stressTest": "Stress Test",
-    "@stressTest": {
-        "description": "For stress testing"
+    "uploadFile": "Upload File",
+    "@uploadFile": {
+        "description": "For uploading files"
     },
-    "initialInvestment": "Initial investment",
-    "@initialInvestment": {
-        "description": "For initial investment"
-    },
-    "annualContribution": "Annual Contribution",
-    "@annualContribution": {
-        "description": "For annual contribution"
-    },
-    "annualGrowth": "Annual Growth %",
-    "@annualGrowth": {
-        "description": "For annual Growth"
-    },
-    "fluctuation": "Fluctuation %",
-    "@Fluctuation": {
-        "description": "For fluctuation"
+    "speakMic": "Speak into the mic.",
+    "@speakMic": {
+        "description": "For speaking into mic"
     }
 }
