@@ -1,0 +1,246 @@
+{
+    "language": "English",
+    "@language": {
+        "description": "The current Language"
+    },
+    "proceed": "Proceed",
+    "@proceed": { 
+        "description": "For language dropdown" 
+    },
+    "chooseLanguage": "Choose a language.",
+    "@chooseLanguage": {
+        "description": "For language selection"
+    },
+    "landingPageOne": "Welcome to the AI driven solution to help you plan your retirement. Let Retiral do your fretting for you.",
+    "@landingPageOne": {
+        "description": "For first landing page"
+    },
+    "landingPageTwo": "Sit back, put your feet up while our state-of-the-art algorithms secure your future.",
+    "@landingPageTwo": {
+        "description": "For second landing page"
+    },
+    "landingPageThree": "A few clicks to get various insights on how to pick your ideal retirement life. Doesn't sound too bad, does it?",
+    "@landingPageThree": {
+        "description": "For third landing page"
+    },
+    "login": "Login",
+    "@login": {
+        "description": "For login"
+    },
+    "signup": "Signup",
+    "@signup": {
+        "description": "For signup"
+    },
+    "skip": "Skip",
+    "@skip": {
+        "description": "For skip"
+    },
+    "getStarted": "Get started",
+    "@getStarted": {
+        "description": "For get started"
+    },
+    "loginCatchphrase": "AI-Powered and Ready to Transform Your Retirement.",
+    "@loginCatchphrase": {
+        "description": "for Login catchphrase"
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+        "description": "For forgot password"
+    }, 
+    "madeAnAcc": "Haven't yet made an account? Click here to",
+    "@madeAnAcc": {
+        "description": "for signup support"
+    },
+    "email": "Enter Email",
+    "@email": {
+        "description": "For enter email"
+    },
+    "password": "Enter Password",
+    "@password": {
+        "description": "for enter password"
+    },
+    "confirmPassword": "Confirm Password",
+    "@confirmPassword": {
+        "description": "For confirm password"
+    },
+    "forSignUp": "Sign Up",
+    "@forSignUp": {
+        "description": "For textspan signup"
+    },
+    "resetPass": "Reset password via email.",
+    "@resetPass": {
+        "description": "For reset pass"
+    },
+    "sendEmail": "Send email", 
+    "@sendEmail": {
+        "description": "For send email"
+    },
+    "firstName": "First Name",
+    "@firstName": {
+        "description": "For first name"
+    },
+    "lastName": "Last Name",
+    "@lastName": {
+        "description": "For last name"
+    },
+    "fingerprintAuth": "To secure your retirement in ways more than one.",
+    "@fingerprintAuth": {
+        "description": "For fingerprint auth"
+    },
+    "fingerprintAuthMessage": "Enable fingerprint authentication.",
+    "@fingerprintAuthMessage": {
+        "description": "For fingerprint auth message"
+    },
+    "retiral": "Retiral",
+    "@retiral": {
+        "description": "For app title"
+    },
+    "enterText": "Enter text here.",
+        "@enterText": {
+            "description": "For entering text"
+        },
+    "enter": "Enter",
+    "@enter": {
+        "description": "For enter button"
+    },
+    "home": "Home",
+    "@text": {
+        "description": "For bottombar home"
+    },
+    "news": "News",
+    "@audio": {
+        "description": "For bottombar news"
+    },
+    "forum": "Forum",
+    "@forum": {
+        "description": "For bottombar camera"
+    },
+    "headlines": "Top Headlines",
+    "@headlines": {
+        "description": "For news page"
+    },
+    "currentAge": "Current Age",
+    "@currentAge": {
+        "description": "For current age"
+    },
+    "retireAge": "Retirement Age",
+    "@retireAge": {
+        "description": "For retire age"
+    },
+    "workExp": "Work Experience",
+    "@workExp": {
+        "description": "For work exp"
+    },
+    "salary": "Salary",
+    "@salary": {
+        "description": "For salary"
+    },
+    "inflationRate": "Inflation Rate",
+    "@inflationRate": {
+        "description": "For inflation rate"
+    },
+    "dependents": "No. of dependents",
+    "@dependents": {
+        "description": "For dependents"
+    },
+    "worthOfAssets": "Enter worth of assets",
+    "@worthOfAssets": {
+        "description": "For worth of assets"
+    },
+    "safetyInRetirement": "Safety In Retirement",
+    "@safetyInRetirement": {
+        "description": "For safety in retirement"
+    },
+    "typeOfRetirement": "Type Of Retirement",
+    "@typeOfRetirement": {
+        "description": "For type of retirement"
+    },
+    "cautious": "Cautious",
+    "@cautious": {
+        "description": "For cautious"
+    },
+    "middleOfTheRoad": "Middle-Of-The-road",
+    "@middleofTheRoad": {
+        "description": "For middle of the road"
+    },
+    "daring": "Daring",
+    "@daring": {
+        "description": "For daring"
+    },
+    "likeAKing": "Like a king/queen",
+    "@likeAKing": {
+        "description": "For like a king/queen"
+    },
+    "iAmHappyWayIam": "I am happy the way I am",
+    "@iAmHappyWayIam": {
+        "description": "For I am happy the way I am"
+    },
+    "likeAMonk": "Like a monk",
+    "@likeAMonk": {
+        "description": "For like a monk"
+    },
+    "crosscheck": "Crosscheck your retirement goals",
+    "@crosscheck": {
+        "description": "For crosschecking your retirement goals"
+    },
+    "welcome": "Welcome",
+    "@welcome": {
+        "description": "For welcome"
+    },
+    "meetLikeMindedPeople": "Meet like-minded people.",
+    "@meetLikeMindedPeople": {
+        "description": "For meeting like minded people"
+    },
+    "logout": "Logout",
+    "@logout": {
+        "description": "For logout"
+    },
+    "setting": "Setting",
+    "@setting": {
+        "description": "For settings"
+    },
+    "aboutUs": "About us",
+    "@aboutUs": {
+        "description": "For about us"
+    },
+    "resolveYourQueries": "Resolve your financial queries.",
+    "@resolveYourQueries": {
+        "description": "For resolving your financial queries."
+    },
+    "buildProfile": "Build your initial profile",
+    "@buildProfile": {
+        "description": "For building profile"
+    },
+    "knowMore": "Know More",
+    "@knowMore": {
+        "description": "For knowing more"
+    },
+    "connect": "Connect with a personalised message.",
+    "@connect": {
+        "description": "For knowing more"
+    },
+    "getPlans": "Get Plans",
+    "@getPlans": {
+        "description": "For getting plans"
+    },
+    "stressTest": "Stress Test",
+    "@stressTest": {
+        "description": "For stress testing"
+    },
+    "initialInvestment": "Initial investment",
+    "@initialInvestment": {
+        "description": "For initial investment"
+    },
+    "annualContribution": "Annual Contribution",
+    "@annualContribution": {
+        "description": "For annual contribution"
+    },
+    "annualGrowth": "Annual Growth %",
+    "@annualGrowth": {
+        "description": "For annual Growth"
+    },
+    "fluctuation": "Fluctuation %",
+    "@Fluctuation": {
+        "description": "For fluctuation"
+    }
+}

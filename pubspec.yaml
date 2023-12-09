@@ -1,5 +1,5 @@
 name: jal_anveshak
-description: "A new Flutter project."
+description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.1.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,6 +30,37 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  local_auth:
+  shared_preferences:
+  email_validator:
+  provider:
+  http:
+  adaptive_theme:
+  font_awesome_flutter:
+  settings_ui:
+  marquee:
+  shimmer:
+  lottie:
+  flutter_onboarding_slider:
+  carousel_slider:
+  percent_indicator:
+  fl_chart:
+  google_fonts:
+  url_launcher:
+  image_picker:
+  path_provider:
+  permission_handler:
+  dropdown_search:
+  youtube_player_flutter:
+  intl:
+  rxdart:
+  model_viewer_plus:
+  flutter_sound:
+  loading_animation_widget:
+  file_picker:
+  syncfusion_flutter_gauges:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -52,7 +83,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -62,6 +93,32 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
+    - assets/images/
+
+  fonts:
+    - family: googlesansmed
+      fonts:
+        - asset: assets/fonts/googlesansmedium.ttf
+    - family: googlesansreg
+      fonts:
+        - asset: assets/fonts/googlesansregular.ttf
+    - family: merriweatherbold
+      fonts:
+        - asset: assets/fonts/Merriweather-Bold.ttf
+    - family: merriweatherregular
+      fonts:
+        - asset: assets/fonts/Merriweather-Regular.ttf
+    - family: productSansReg
+      fonts:
+        - asset: assets/fonts/Product Sans Regular.ttf
+    - family: productSansBold
+      fonts:
+        - asset: assets/fonts/Product Sans Bold.ttf
+    - family: productSansMed
+      fonts:
+        - asset: assets/fonts/Product Sans Medium.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
