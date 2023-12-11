@@ -80,7 +80,7 @@ class _TextInputState extends State<TextInput> {
                         lst.add(text);
                         setState(() {});
                         _controller.clear();
-                        var res = await getRewritten(text);
+                        var res = await getAnswer(text);
                         lst.add(res[0].toString());
                         setState(() {});
                       },
@@ -103,46 +103,17 @@ class _TextInputState extends State<TextInput> {
             ]));
   }
 
-  Future<List<Object?>> getRewritten(String text) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    var res = await http.post(
-      Uri.parse('$ngrokurl/rewriter/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'token': '$token'
-      },
-      body: jsonEncode(<String, String>{
-        "text":
-            "Fix it such that grammatical and spelling errors are corrected: $text",
-        "emotion": "Professional & Cheerful"
-      }),
-    );
-    Map<String, dynamic> data = jsonDecode(res.body);
-    var stuff = Audio.fromJson(data);
-    if (kDebugMode) {
-      print(res.statusCode);
-      print(res.body);
-    }
-    if (res.statusCode == 200) {
-      if (kDebugMode) {
-        print(res.body);
-      }
-    }
-    return [stuff.text, res.statusCode];
-  }
 
-  Future<List<Object?>> getGrammar(String text) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
+
+
+  Future<List<Object?>> getAnswer(String text) async {
     var res = await http.post(
-      Uri.parse('$ngrokurl/grammar/'),
+      Uri.parse('https://0383-35-237-16-206.ngrok.io/ask-question'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'token': '$token'
       },
       body: jsonEncode(
-          <String, String>{"text": text, "emotion": "Professional & Cheerful"}),
+          <String, String>{"query": text}),
     );
     Map<String, dynamic> data = jsonDecode(res.body);
     var stuff = Audio.fromJson(data);
@@ -155,6 +126,6 @@ class _TextInputState extends State<TextInput> {
         print(res.body);
       }
     }
-    return [stuff.text, res.statusCode];
+    return [data['answer'], res.statusCode];
   }
 }
