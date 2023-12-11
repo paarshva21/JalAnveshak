@@ -108,7 +108,7 @@ class _TextInputState extends State<TextInput> {
 
   Future<List<Object?>> getAnswer(String text) async {
     var res = await http.post(
-      Uri.parse('https://0383-35-237-16-206.ngrok.io/ask-question'),
+      Uri.parse('https://b0ce-34-106-218-246.ngrok.io/ask-question'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
