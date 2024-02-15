@@ -2,7 +2,7 @@ import 'BottomBar/AudioInput.dart';
 import 'BottomBar/Chat/TextInput.dart';
 import 'BottomBar/OCRInput.dart';
 import 'package:flutter/material.dart';
-import 'package:jal_anveshak/Screens/Drawer.dart';
+import 'package:jal_anveshak/Screens/Drawer/Drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

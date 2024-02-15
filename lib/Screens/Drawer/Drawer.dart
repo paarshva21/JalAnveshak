@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../HomePage.dart';
-import 'Setting.dart';
+import '../../HomePage.dart';
+import '../Setting.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'Maps.dart';
 
 class NavigationDrawer1 extends StatelessWidget {
   const NavigationDrawer1({Key? key}) : super(key: key);
@@ -59,6 +61,22 @@ class NavigationDrawer1 extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const Setting()));
             },
           ),
+          ListTile(
+            leading: const Icon(
+              Icons.map_outlined,
+              color: Colors.black,
+              size: 30,
+            ),
+            title: Text(AppLocalizations.of(context)!.map,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20)),
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const Maps()));
+            },
+          ),
           const Divider(
             color: Colors.black,
             thickness: 1,
@@ -84,6 +102,7 @@ class NavigationDrawer1 extends StatelessWidget {
                   ModalRoute.withName('/'),
                 );
               }),
+
         ]),
       ]));
 }

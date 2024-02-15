@@ -230,5 +230,9 @@
     "speakMic": "Speak into the mic.",
     "@speakMic": {
         "description": "For speaking into mic"
+    },
+    "map": "Map",
+    "@map": {
+        "description": "For map"
     }
 }
