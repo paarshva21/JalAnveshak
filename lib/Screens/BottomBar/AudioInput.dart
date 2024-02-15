@@ -30,46 +30,8 @@ class _AudioInputState extends State<AudioInput>
   double deviceHeight = Constants().deviceHeight,
       deviceWidth = Constants().deviceWidth;
   late AnimationController _controller;
-  final recorder = FlutterSoundRecorder();
-  final player = FlutterSoundPlayer();
   bool isRecorderReady = false, gotSomeTextYo = false, isPlaying = false;
   String ngrokurl = Constants().url;
-
-  Future record() async {
-    if (!isRecorderReady) return;
-    await recorder.startRecorder(toFile: 'audio');
-  }
-
-  Future stop() async {
-    if (!isRecorderReady) return;
-    String? path = await recorder.stopRecorder();
-    File audioPath = await saveAudioPermanently(path!);
-    if (kDebugMode) {
-      print('Recorded audio: $path');
-    }
-    lst = await sendAudio(audioPath);
-    if (kDebugMode) {
-      print(lst);
-    }
-    if (lst[1] == 200) {
-      gotSomeTextYo = true;
-      setState(() {
-        maxDuration = maxDuration;
-      });
-    }
-  }
-
-  Future initRecorder() async {
-    final status = await Permission.microphone.request();
-
-    if (status != PermissionStatus.granted) {
-      throw 'Microphone permission not granted';
-    }
-
-    await recorder.openRecorder();
-    isRecorderReady = true;
-    recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
-  }
 
   @override
   void initState() {
@@ -84,17 +46,12 @@ class _AudioInputState extends State<AudioInput>
           isPlaying = false;
         }
       });
-    initRecorder();
-    player.openPlayer().then((value) {
-      setState(() {});
-    });
+
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    recorder.closeRecorder();
-    player.closePlayer();
     super.dispose();
   }
 
@@ -138,27 +95,27 @@ class _AudioInputState extends State<AudioInput>
                 SizedBox(
                   height: 100 * (height / deviceHeight),
                 ),
-                StreamBuilder<RecordingDisposition>(
-                    stream: recorder.onProgress,
-                    builder: (context, snapshot) {
-                      final duration = snapshot.hasData
-                          ? snapshot.data!.duration
-                          : Duration.zero;
-                      String twoDigits(int n) => n.toString().padLeft(2, '0');
-                      final twoDigitMinutes =
-                          twoDigits(duration.inMinutes.remainder(60));
-                      final twoDigitSeconds =
-                          twoDigits(duration.inSeconds.remainder(60));
-                      return Text(
-                        "$twoDigitMinutes:$twoDigitSeconds s",
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.cyan[500],
-                          fontFamily: "productSansReg",
-                        ),
-                      );
-                    }),
+                // StreamBuilder<RecordingDisposition>(
+                //     stream: recorder.onProgress,
+                //     builder: (context, snapshot) {
+                //       final duration = snapshot.hasData
+                //           ? snapshot.data!.duration
+                //           : Duration.zero;
+                //       String twoDigits(int n) => n.toString().padLeft(2, '0');
+                //       final twoDigitMinutes =
+                //           twoDigits(duration.inMinutes.remainder(60));
+                //       final twoDigitSeconds =
+                //           twoDigits(duration.inSeconds.remainder(60));
+                //       return Text(
+                //         "$twoDigitMinutes:$twoDigitSeconds s",
+                //         style: TextStyle(
+                //           fontSize: 40,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.cyan[500],
+                //           fontFamily: "productSansReg",
+                //         ),
+                //       );
+                //     }),
                 SizedBox(
                   height: 80 * (height / deviceHeight),
                 ),
@@ -205,19 +162,7 @@ class _AudioInputState extends State<AudioInput>
                       ),
                       shape: BoxShape.circle),
                   child: GestureDetector(
-                    onTap: () async {
-                      if (recorder.isRecording) {
-                        isPlaying = false;
-                        await stop();
-                        _controller.reset();
-                      } else {
-                        isPlaying = true;
-                        await record();
-                        _controller.reset();
-                        _controller.forward();
-                      }
-                      setState(() {});
-                    },
+                    onTap: () async {},
                     child: AnimatedContainer(
                       height: isPlaying
                           ? 25 * (height / deviceHeight)
@@ -243,129 +188,5 @@ class _AudioInputState extends State<AudioInput>
         ),
       ),
     );
-  }
-
-  Future<List<Object?>> sendAudio(File? audioPath) async {
-    List<Object?> lst = [];
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    var header = {'token': '$token'};
-    print(token);
-    if (kDebugMode) {
-      print(audioPath!.path);
-    }
-    var response = http.MultipartRequest(
-      'POST',
-      Uri.parse('$ngrokurl/transcribe/'),
-    );
-    response.headers.addAll(header);
-    response.files.add(http.MultipartFile(
-        'file', audioPath!.readAsBytes().asStream(), audioPath.lengthSync(),
-        filename: basename(audioPath.path),
-        contentType: MediaType('application', 'octet-stream')));
-    var res = await response.send();
-    var responseBody = await res.stream.bytesToString();
-    if (kDebugMode) {
-      print(responseBody);
-      print(res.statusCode);
-    }
-    if (res.statusCode != 200) {
-      Utils.showSnackBar("Error occurred!");
-    }
-
-    Map<String, dynamic> data = jsonDecode(responseBody);
-    var stuff = Audio.fromJson(data);
-    if (res.statusCode == 200) {
-      if (kDebugMode) {
-        print(stuff.text);
-      }
-      lst = await getRewritten(stuff.text!);
-      if (kDebugMode) {
-        print(stuff.text);
-      }
-    }
-
-    return lst;
-  }
-
-  Future<List<Object?>> getRewritten(String text) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    var res = await http.post(
-      Uri.parse('$ngrokurl/rewriter/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'token': '$token'
-      },
-      body: jsonEncode(<String, String>{
-        "text":
-            "Fix it such that grammatical and spelling errors are corrected: $text",
-        "emotion": "Professional & Cheerful"
-      }),
-    );
-    Map<String, dynamic> data = jsonDecode(res.body);
-    var stuff = Audio.fromJson(data);
-    if (kDebugMode) {
-      print(res.statusCode);
-      print(res.body);
-      await getAudio(stuff.text!);
-    }
-    if (res.statusCode == 200) {
-      if (kDebugMode) {
-        print(res.body);
-      }
-    }
-    return [stuff.text, res.statusCode];
-  }
-
-  Future<List<Object?>> getGrammar(String text) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    var res = await http.post(
-      Uri.parse('$ngrokurl/grammar/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'token': '$token'
-      },
-      body: jsonEncode(
-          <String, String>{"text": text, "emotion": "Professional & Cheerful"}),
-    );
-    Map<String, dynamic> data = jsonDecode(res.body);
-    var stuff = Audio.fromJson(data);
-    if (kDebugMode) {
-      print(res.statusCode);
-      print(res.body);
-      await getAudio(stuff.text!);
-    }
-    if (res.statusCode == 200) {
-      if (kDebugMode) {
-        print(res.body);
-      }
-    }
-    return [stuff.text, res.statusCode];
-  }
-
-  Future getAudio(String text) async {
-    var res = await http.post(
-      Uri.parse('$ngrokurl/labs-tts/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-          <String, String>{"text": text, 'emotion': "Cheerful & Professional"}),
-    );
-    if (res.statusCode == 200) {
-      if (kDebugMode) {
-        print(res.bodyBytes);
-      }
-      await player.startPlayer(fromDataBuffer: res.bodyBytes);
-    }
-  }
-
-  Future<File> saveAudioPermanently(String path) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(path);
-    final audio = File('${directory.path}/$name');
-    return File(path).copy(audio.path);
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,70 +9,17 @@ class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
 
   @override
-  State<Maps> createState() => _mapsState();
+  State<Maps> createState() => _MapsState();
 }
 
-class _mapsState extends State<Maps> {
-  Position? position;
+final Set<Marker> _markers = <Marker>{};
+Position? position;
+
+class _MapsState extends State<Maps> {
   late GoogleMapController _mapController;
-  final Set<Marker> _markers = <Marker>{};
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
-  }
-
-  void setLocation() async {
-    position = await getCurrentUserLocation();
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    setLocation();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: FutureBuilder<List<Double>?>(
-          future: getMarkers(),
-          builder: (context, snapshot) {
-            print(snapshot.data);
-            return SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: GoogleMap(
-                initialCameraPosition: const CameraPosition(
-                    target: LatLng(19.0968, 72.8517),
-                    zoom: 14),
-                onMapCreated: _onMapCreated,
-                markers: _markers,
-                circles: {
-                  Circle(
-                      circleId: const CircleId("0"),
-                      center: const LatLng(19.0968, 72.8517),
-                      radius: 750,
-                      fillColor: Colors.green.withOpacity(0.5),
-                      strokeColor: Colors.green.withOpacity(0.5),
-                      strokeWidth: 1)
-                },
-              ),
-            );
-          }),
-    ));
-  }
-
-  Future<List<Double>?> getMarkers() async {
-    final response = await http
-        .get(Uri.parse('https://bb14-34-69-52-15.ngrok-free.app/process_text'));
-    var data = jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
-      debugPrint(data);
-    } else {
-      debugPrint("error!");
-    }
   }
 
   Future<Position> getCurrentUserLocation() async {
@@ -102,5 +48,82 @@ class _mapsState extends State<Maps> {
         desiredAccuracy: LocationAccuracy.high);
 
     return position;
+  }
+
+  Future<void> getMarkers() async {
+    if (kDebugMode) {
+      print("getMarkers is entered");
+    }
+    final response = await http.get(
+        Uri.parse('https://9ee4-35-227-54-49.ngrok-free.app/process_text'));
+    List data = jsonDecode(response.body);
+    if (kDebugMode) {
+      print(response.headers);
+      print(response.statusCode);
+    }
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("ji");
+        print(data);
+      }
+    } else {
+      debugPrint("error!");
+    }
+
+    for (int i = 0; i < data.length / 2; i++) {
+      _markers.add(Marker(
+          markerId: MarkerId((i + 1).toString()),
+          position: LatLng(data[i + 5], data[i]),
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueAzure)));
+    }
+  }
+
+  void setLocation() async {
+    position = await getCurrentUserLocation();
+    _markers.add(Marker(
+        markerId: const MarkerId("0"),
+        position: LatLng(position!.latitude, position!.longitude)));
+    await getMarkers();
+    if (kDebugMode) {
+      print(_markers);
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setLocation();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+          body: position != null
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                        target: LatLng(position!.latitude, position!.longitude),
+                        zoom: 14),
+                    onMapCreated: _onMapCreated,
+                    markers: _markers,
+                    circles: {
+                      Circle(
+                          circleId: const CircleId("0"),
+                          center:
+                              LatLng(position!.latitude, position!.longitude),
+                          radius: 750,
+                          fillColor: Colors.green.withOpacity(0.5),
+                          strokeColor: Colors.green.withOpacity(0.5),
+                          strokeWidth: 1)
+                    },
+                  ),
+                )
+              : const Center(child: CircularProgressIndicator())),
+    );
   }
 }
