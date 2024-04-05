@@ -13,7 +13,6 @@ import 'package:jal_anveshak/Models/LogInModel.dart';
 import 'package:jal_anveshak/Models/Utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../Screens/UserPage.dart';
 
 class Login extends StatefulWidget {
