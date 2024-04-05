@@ -224,7 +224,8 @@ class _Login extends State<Login> {
                                       if (true) {
                                         if (_supportState) {
                                           bool? finger =
-                                              await _fingerprintAuthenticate();
+                                              await _fingerprintAuthenticate(
+                                                  context);
                                           if (finger!) {
                                             SharedPreferences prefs =
                                                 await SharedPreferences
@@ -350,10 +351,10 @@ class _Login extends State<Login> {
     return list;
   }
 
-  Future<bool?> _fingerprintAuthenticate() async {
+  Future<bool?> _fingerprintAuthenticate(BuildContext context) async {
     try {
       bool authenticated = await auth.authenticate(
-          localizedReason: "To maintain privacy",
+          localizedReason: AppLocalizations.of(context)!.toMaintainPrivacy,
           options: const AuthenticationOptions(
             stickyAuth: true,
             biometricOnly: true,
