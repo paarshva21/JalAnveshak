@@ -63,6 +63,26 @@ dependencies:
   syncfusion_flutter_gauges:
   google_maps_flutter:
   geolocator:
+  flutter_launcher_icons:
+  rename_app:
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon_alt.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/app_icon_alt.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon_alt.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/app_icon_alt.png"
 
 
   # The following adds the Cupertino Icons font to your application.
