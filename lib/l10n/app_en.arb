@@ -107,90 +107,6 @@
     "@home": {
         "description": "For bottombar home"
     },
-    "news": "News",
-    "@news": {
-        "description": "For bottombar news"
-    },
-    "forum": "Forum",
-    "@forum": {
-        "description": "For bottombar camera"
-    },
-    "headlines": "Top Headlines",
-    "@headlines": {
-        "description": "For news page"
-    },
-    "currentAge": "Current Age",
-    "@currentAge": {
-        "description": "For current age"
-    },
-    "retireAge": "Retirement Age",
-    "@retireAge": {
-        "description": "For retire age"
-    },
-    "workExp": "Work Experience",
-    "@workExp": {
-        "description": "For work exp"
-    },
-    "salary": "Salary",
-    "@salary": {
-        "description": "For salary"
-    },
-    "inflationRate": "Inflation Rate",
-    "@inflationRate": {
-        "description": "For inflation rate"
-    },
-    "dependents": "No. of dependents",
-    "@dependents": {
-        "description": "For dependents"
-    },
-    "worthOfAssets": "Enter worth of assets",
-    "@worthOfAssets": {
-        "description": "For worth of assets"
-    },
-    "safetyInRetirement": "Safety In Retirement",
-    "@safetyInRetirement": {
-        "description": "For safety in retirement"
-    },
-    "typeOfRetirement": "Type Of Retirement",
-    "@typeOfRetirement": {
-        "description": "For type of retirement"
-    },
-    "cautious": "Cautious",
-    "@cautious": {
-        "description": "For cautious"
-    },
-    "middleOfTheRoad": "Middle-Of-The-road",
-    "@middleofTheRoad": {
-        "description": "For middle of the road"
-    },
-    "daring": "Daring",
-    "@daring": {
-        "description": "For daring"
-    },
-    "likeAKing": "Like a king/queen",
-    "@likeAKing": {
-        "description": "For like a king/queen"
-    },
-    "iAmHappyWayIam": "I am happy the way I am",
-    "@iAmHappyWayIam": {
-        "description": "For I am happy the way I am"
-    },
-    "likeAMonk": "Like a monk",
-    "@likeAMonk": {
-        "description": "For like a monk"
-    },
-    "crosscheck": "Crosscheck your retirement goals",
-    "@crosscheck": {
-        "description": "For crosschecking your retirement goals"
-    },
-    "welcome": "Welcome",
-    "@welcome": {
-        "description": "For welcome"
-    },
-    "meetLikeMindedPeople": "Meet like-minded people.",
-    "@meetLikeMindedPeople": {
-        "description": "For meeting like minded people"
-    },
     "logout": "Logout",
     "@logout": {
         "description": "For logout"
@@ -234,5 +150,45 @@
     "map": "Map",
     "@map": {
         "description": "For map"
+    },
+    "darkTheme": "Dark Theme",
+    "@darkTheme": {
+        "description": "For dark theme"
+    },
+    "display": "Display",
+    "@display": {
+        "description": "For display"
+    },
+    "privacy": "Privacy",
+    "@privacy": {
+        "description": "For privacy"
+    },
+    "permissions": "Permissions",
+    "@permissions": {
+        "description": "For permissions"
+    },
+    "security": "Security",
+    "@security": {
+        "description": "For security"
+    },
+    "accounts": "Accounts",
+    "@accounts": {
+        "description": "For accounts"
+    },
+    "multipleUsers": "Multiple Users",
+    "@multipleUsers": {
+        "description": "For multiple users"
+    },
+    "feedback": "Feedback",
+    "@feedback": {
+        "description": "For feedback"
+    },
+     "news": "News",
+    "@news": {
+        "description": "For bottombar news"
+    },
+    "forum": "Forum",
+    "@forum": {
+        "description": "For bottombar camera"
     }
 }
