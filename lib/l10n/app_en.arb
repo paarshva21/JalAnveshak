@@ -183,12 +183,8 @@
     "@feedback": {
         "description": "For feedback"
     },
-     "news": "News",
-    "@news": {
-        "description": "For bottombar news"
-    },
-    "forum": "Forum",
-    "@forum": {
-        "description": "For bottombar camera"
+    "toMaintainPrivacy": "To maintain privacy",
+    "@toMaintainPrivacy": {
+        "description": "To maintain privacy"
     }
 }

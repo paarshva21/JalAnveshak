@@ -155,42 +155,44 @@ class _SettingState extends State<Setting> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            AppLocalizations.of(context)!.chooseLanguage,
-            style: TextStyle(
-              fontFamily: "productSansReg",
-              color: Colors.cyan[500],
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          content: DropdownButtonFormField(
-            items: const [
-              DropdownMenuItem(
-                value: 'en',
-                child: Text('English'),
-              ),
-              DropdownMenuItem(value: 'hi', child: Text('हिंदी')),
-              DropdownMenuItem(value: 'ar', child: Text('عربي')),
-            ],
-            onChanged: (v) => setState(() {
-              MainApp.setLocale(context, Locale(v.toString()));
-              selectedVal = v!;
-              Navigator.of(context).pop();
-            }),
-            value: selectedVal,
-            style: const TextStyle(
+        return GestureDetector(
+
+          child: AlertDialog(
+            title: Text(
+              AppLocalizations.of(context)!.chooseLanguage,
+              style: TextStyle(
                 fontFamily: "productSansReg",
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 20),
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(13),
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(7.0),
-                    borderSide: BorderSide.none)),
+                color: Colors.cyan[500],
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            content: DropdownButtonFormField(
+              items: const [
+                DropdownMenuItem(
+                  value: 'en',
+                  child: Text('English'),
+                ),
+                DropdownMenuItem(value: 'hi', child: Text('हिंदी')),
+                DropdownMenuItem(value: 'ar', child: Text('عربي')),
+              ],
+              onChanged: (v) => setState(() {
+                MainApp.setLocale(context, Locale(v.toString()));
+                selectedVal = v!;
+              }),
+              value: selectedVal,
+              style: const TextStyle(
+                  fontFamily: "productSansReg",
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20),
+              decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(13),
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                      borderSide: BorderSide.none)),
+            ),
           ),
         );
       },

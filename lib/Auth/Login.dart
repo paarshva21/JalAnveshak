@@ -353,7 +353,7 @@ class _Login extends State<Login> {
   Future<bool?> _fingerprintAuthenticate() async {
     try {
       bool authenticated = await auth.authenticate(
-          localizedReason: "To secure your retirement in ways more than one.",
+          localizedReason: "To maintain privacy",
           options: const AuthenticationOptions(
             stickyAuth: true,
             biometricOnly: true,

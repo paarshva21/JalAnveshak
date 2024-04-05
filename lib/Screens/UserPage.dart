@@ -20,13 +20,15 @@ class _UserPageState extends State<UserPage> {
   int currentIndex = 1;
   late final List<Widget> screens;
 
+  late List<String> titleList;
+
   @override
   void initState() {
     super.initState();
     screens = const [
-    OCRInput(),
-    TextInput(),
-    AudioInput(),
+      OCRInput(),
+      TextInput(),
+      AudioInput(),
     ];
   }
 
@@ -34,18 +36,31 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+    titleList = [
+      AppLocalizations.of(context)!.camera,
+      AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.audio
+    ];
+
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-          
-          },
+          onPressed: () {},
           backgroundColor: Colors.cyan[500],
           child: const FaIcon(FontAwesomeIcons.robot),
         ),
         extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(
+          title: Text(
+            titleList[currentIndex],
+            style: const TextStyle(
+                color: Colors.cyan,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                fontFamily: "productSansReg"),
+          ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           iconTheme: const IconThemeData(color: Colors.white),
@@ -93,7 +108,7 @@ class _UserPageState extends State<UserPage> {
                     Icons.account_balance,
                     color: Colors.black,
                   ),
-                  label: AppLocalizations.of(context)!.forum,
+                  label: AppLocalizations.of(context)!.camera,
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(
@@ -107,7 +122,7 @@ class _UserPageState extends State<UserPage> {
                     Icons.auto_graph_outlined,
                     color: Colors.black,
                   ),
-                  label: AppLocalizations.of(context)!.news,
+                  label: AppLocalizations.of(context)!.audio,
                 ),
               ],
             ),
