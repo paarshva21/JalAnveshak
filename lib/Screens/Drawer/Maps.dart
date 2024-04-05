@@ -55,7 +55,7 @@ class _MapsState extends State<Maps> {
       print("getMarkers is entered");
     }
     final response = await http.get(
-        Uri.parse('https://4b53-34-132-1-222.ngrok-free.app/process_text'));
+        Uri.parse('https://2c8e-35-237-253-119.ngrok-free.app/process_text'));
     List data = jsonDecode(response.body);
     if (kDebugMode) {
       print(response.headers);
