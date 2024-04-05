@@ -55,5 +55,7 @@
     "accounts": "الحسابات",
     "multipleUsers": "مستخدمون متعددون",
     "feedback": "تقييم",
-    "toMaintainPrivacy": "للحفاظ على الخصوصية"
+    "toMaintainPrivacy": "للحفاظ على الخصوصية",
+    "firstName": "أدخل الاسم الأول",
+    "lastName": "أدخل اسم العائلة"
 }

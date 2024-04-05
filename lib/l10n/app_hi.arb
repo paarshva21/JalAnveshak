@@ -45,5 +45,7 @@
     "accounts": "खाते",
     "multipleUsers": "एकाधिक उपयोगकर्ता",
     "feedback": "प्रतिक्रिया",
-    "toMaintainPrivacy": "गोपनीयता बनाए रखने के लिए"
+    "toMaintainPrivacy": "गोपनीयता बनाए रखने के लिए",
+    "firstName": "पहला नाम डालें",
+    "lastName": "आखरी नाम डाले"
 }
