@@ -1,3 +1,5 @@
+import 'package:jal_anveshak/Screens/BottomBar/Chat/chatGemini/gemini.dart';
+
 import 'BottomBar/AudioInput.dart';
 import 'BottomBar/Chat/TextInput.dart';
 import 'BottomBar/OCRInput.dart';
@@ -27,7 +29,7 @@ class _UserPageState extends State<UserPage> {
     super.initState();
     screens = const [
       OCRInput(),
-      TextInput(),
+      GeminiPage(),
       AudioInput(),
     ];
   }
@@ -45,11 +47,11 @@ class _UserPageState extends State<UserPage> {
 
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.cyan[500],
-          child: const FaIcon(FontAwesomeIcons.robot),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   backgroundColor: Colors.cyan[500],
+        //   child: const FaIcon(FontAwesomeIcons.robot),
+        // ),
         extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(

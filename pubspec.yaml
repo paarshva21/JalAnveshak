@@ -65,6 +65,9 @@ dependencies:
   geolocator:
   flutter_launcher_icons:
   rename_app:
+  google_generative_ai:
+  flutter_phone_direct_caller:
+  flutter_spinkit:
 
 flutter_launcher_icons:
   android: "launcher_icon"

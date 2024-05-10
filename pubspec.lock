@@ -275,6 +275,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.11"
+  flutter_phone_direct_caller:
+    dependency: "direct main"
+    description:
+      name: flutter_phone_direct_caller
+      sha256: a50abfb49656d39e777278348742d0d09ecfa5d4918bbc4e0b19df46e8dfd858
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -307,6 +315,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.2.13"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      sha256: d2696eed13732831414595b98863260e33e8882fc069ee80ec35d4ac9ddb0472
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -381,6 +397,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  google_generative_ai:
+    dependency: "direct main"
+    description:
+      name: google_generative_ai
+      sha256: "3a51ed314e596ddee9654ab9f1372fff0b8f3917be937655bcadebd5fa063df0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3"
   google_maps:
     dependency: transitive
     description:
