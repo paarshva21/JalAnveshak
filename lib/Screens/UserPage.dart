@@ -1,5 +1,5 @@
 import 'package:jal_anveshak/Screens/BottomBar/Chat/chatGemini/gemini.dart';
-
+import 'package:jal_anveshak/Screens/BottomBar/fish.dart';
 import 'BottomBar/AudioInput.dart';
 import 'BottomBar/Chat/TextInput.dart';
 import 'BottomBar/OCRInput.dart';
@@ -28,7 +28,7 @@ class _UserPageState extends State<UserPage> {
   void initState() {
     super.initState();
     screens = const [
-      OCRInput(),
+      FishPage(),
       GeminiPage(),
       AudioInput(),
     ];
@@ -40,18 +40,13 @@ class _UserPageState extends State<UserPage> {
     var width = MediaQuery.of(context).size.width;
 
     titleList = [
-      AppLocalizations.of(context)!.camera,
+      AppLocalizations.of(context)!.display,
       AppLocalizations.of(context)!.home,
       AppLocalizations.of(context)!.audio
     ];
 
     return SafeArea(
       child: Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   backgroundColor: Colors.cyan[500],
-        //   child: const FaIcon(FontAwesomeIcons.robot),
-        // ),
         extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(
@@ -107,7 +102,7 @@ class _UserPageState extends State<UserPage> {
               items: [
                 BottomNavigationBarItem(
                   icon: const FaIcon(
-                    Icons.account_balance,
+                    Icons.water,
                     color: Colors.black,
                   ),
                   label: AppLocalizations.of(context)!.camera,
@@ -121,7 +116,7 @@ class _UserPageState extends State<UserPage> {
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(
-                    Icons.auto_graph_outlined,
+                    Icons.audiotrack_outlined,
                     color: Colors.black,
                   ),
                   label: AppLocalizations.of(context)!.audio,
