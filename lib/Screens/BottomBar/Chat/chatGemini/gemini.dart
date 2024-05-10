@@ -194,6 +194,9 @@ class _GeminiPageState extends State<GeminiPage> {
                                   ),
                                   InkWell(
                                     onTap: () async {
+                                      RegExp markdownRegex = RegExp(
+                                          r'([*_`~]|^\s*>+\s*)|(\[(.*?)\]\((.*?)\))');
+
                                       String text = _controller.text.trim();
 
                                       setState(() {
@@ -201,7 +204,6 @@ class _GeminiPageState extends State<GeminiPage> {
                                         _controller.clear();
                                         readOnly = !readOnly;
                                       });
-
 
                                       final prompt =
                                           TextPart(promptGemini + text);
@@ -214,12 +216,27 @@ class _GeminiPageState extends State<GeminiPage> {
                                           DataPart('image/jpeg', imageBytes),
                                         ];
 
-
-                                        lst.add((await model.generateContent([
-                                          Content.multi(
-                                              [TextPart(text), ...imageParts])
+                                        var response =
+                                            (await model.generateContent([
+                                          Content.multi([prompt, ...imageParts])
                                         ]))
-                                            .text!);
+                                                .text!
+                                                .replaceAll(markdownRegex, '');
+
+                                        print(response);
+                                        lst.add(response);
+                                        readOnly = !readOnly;
+                                        setState(() {});
+                                      } else {
+                                        var response = (await modelText
+                                                .generateContent([
+                                          Content.text(promptGemini + text)
+                                        ]))
+                                            .text
+                                            ?.replaceAll(markdownRegex, '');
+
+                                        print(response);
+                                        lst.add(response!);
                                         readOnly = !readOnly;
                                         setState(() {});
                                       }
@@ -261,7 +278,7 @@ class _GeminiPageState extends State<GeminiPage> {
     String apiUrl =
         "https://api-inference.huggingface.co/models/google-bert/bert-base-uncased";
     var headers = {
-      "Authorization": "Bearer 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"
+      "Authorization": "Bearer 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"
     };
     http.Response res = await http.post(
       Uri.parse(apiUrl),

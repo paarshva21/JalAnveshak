@@ -3,18 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 var lst = [];
@@ -42,8 +37,7 @@ class _AudioInputState extends State<AudioInput>
 
   bool isRecorderReady = false,
       gotSomeTextYo = false,
-      isPlaying = false,
-      isNameDisplayed = false;
+      isPlaying = false;
 
   Future record() async {
     if (!isRecorderReady) return;
@@ -62,14 +56,10 @@ class _AudioInputState extends State<AudioInput>
       print(lst);
     }
 
-    if (true) {
-      gotSomeTextYo = true;
-      setState(() {
-        maxDuration = maxDuration;
-      });
-    }
-
-    _callNumber();
+    gotSomeTextYo = true;
+    setState(() {
+      maxDuration = maxDuration;
+    });
   }
 
   Future initRecorder() async {
@@ -241,6 +231,7 @@ class _AudioInputState extends State<AudioInput>
                         await record();
                         _controller.reset();
                         _controller.forward();
+                        _callNumber();
                       }
                       setState(() {});
                     },
