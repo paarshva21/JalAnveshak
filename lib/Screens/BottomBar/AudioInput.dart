@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../Models/AudioModel.dart';
-import '../../Models/Utils.dart';
-import '../../constants.dart';
+import '../../../constants.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart';
@@ -16,6 +18,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 var lst = [];
+var authLst = [];
 
 class AudioInput extends StatefulWidget {
   const AudioInput({super.key});
@@ -26,16 +29,65 @@ class AudioInput extends StatefulWidget {
 
 class _AudioInputState extends State<AudioInput>
     with SingleTickerProviderStateMixin {
+  String lastWords = '';
   int maxDuration = 10;
+
   double deviceHeight = Constants().deviceHeight,
       deviceWidth = Constants().deviceWidth;
+
   late AnimationController _controller;
-  bool isRecorderReady = false, gotSomeTextYo = false, isPlaying = false;
-  String ngrokurl = Constants().url;
+
+  final recorder = FlutterSoundRecorder();
+  final player = FlutterSoundPlayer();
+
+  bool isRecorderReady = false,
+      gotSomeTextYo = false,
+      isPlaying = false,
+      isNameDisplayed = false;
+
+  Future record() async {
+    if (!isRecorderReady) return;
+    await recorder.startRecorder(toFile: 'audio');
+  }
+
+  Future stop() async {
+    if (!isRecorderReady) return;
+    String? path = await recorder.stopRecorder();
+    File audioPath = await saveAudioPermanently(path!);
+    if (kDebugMode) {
+      print('Recorded audio: $path');
+    }
+
+    if (kDebugMode) {
+      print(lst);
+    }
+
+    if (true) {
+      gotSomeTextYo = true;
+      setState(() {
+        maxDuration = maxDuration;
+      });
+    }
+
+    _callNumber();
+  }
+
+  Future initRecorder() async {
+    final status = await Permission.microphone.request();
+
+    if (status != PermissionStatus.granted) {
+      throw 'Microphone permission not granted';
+    }
+
+    await recorder.openRecorder();
+    isRecorderReady = true;
+    recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
+  }
 
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
         vsync: this, duration: Duration(seconds: maxDuration))
       ..addListener(() {
@@ -47,11 +99,18 @@ class _AudioInputState extends State<AudioInput>
         }
       });
 
+    initRecorder();
+
+    player.openPlayer().then((value) {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    recorder.closeRecorder();
+    player.closePlayer();
     super.dispose();
   }
 
@@ -79,65 +138,75 @@ class _AudioInputState extends State<AudioInput>
             child: Column(
               children: [
                 SizedBox(
-                  height: 50 * (height / deviceHeight),
+                  height: 20 * (height / deviceHeight),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     AppLocalizations.of(context)!.speakMic,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: "productSansReg",
-                        color: Colors.cyan[500],
+                        color: Colors.cyan,
                         fontWeight: FontWeight.w700,
                         fontSize: 25),
                   ),
                 ),
                 SizedBox(
-                  height: 100 * (height / deviceHeight),
+                  height: 30 * (height / deviceHeight),
                 ),
-                // StreamBuilder<RecordingDisposition>(
-                //     stream: recorder.onProgress,
-                //     builder: (context, snapshot) {
-                //       final duration = snapshot.hasData
-                //           ? snapshot.data!.duration
-                //           : Duration.zero;
-                //       String twoDigits(int n) => n.toString().padLeft(2, '0');
-                //       final twoDigitMinutes =
-                //           twoDigits(duration.inMinutes.remainder(60));
-                //       final twoDigitSeconds =
-                //           twoDigits(duration.inSeconds.remainder(60));
-                //       return Text(
-                //         "$twoDigitMinutes:$twoDigitSeconds s",
-                //         style: TextStyle(
-                //           fontSize: 40,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.cyan[500],
-                //           fontFamily: "productSansReg",
-                //         ),
-                //       );
-                //     }),
+                StreamBuilder<RecordingDisposition>(
+                    stream: recorder.onProgress,
+                    builder: (context, snapshot) {
+                      final duration = snapshot.hasData
+                          ? snapshot.data!.duration
+                          : Duration.zero;
+                      String twoDigits(int n) => n.toString().padLeft(2, '0');
+                      final twoDigitMinutes =
+                          twoDigits(duration.inMinutes.remainder(60));
+                      final twoDigitSeconds =
+                          twoDigits(duration.inSeconds.remainder(60));
+                      return Text(
+                        "$twoDigitMinutes:$twoDigitSeconds s",
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.cyan,
+                          fontFamily: "productSansReg",
+                        ),
+                      );
+                    }),
                 SizedBox(
-                  height: 80 * (height / deviceHeight),
+                  height: 40 * (height / deviceHeight),
                 ),
                 if (isPlaying)
                   Center(
                       child: LoadingAnimationWidget.staggeredDotsWave(
-                    color: Colors.cyan[500]!,
-                    size: 50 * (height / deviceHeight),
+                    color: Colors.cyan,
+                    size: 20 * (height / deviceHeight),
                   )),
                 if (!isPlaying)
                   SizedBox(
-                    height: 150 * (height / deviceHeight),
+                    height: 60 * (height / deviceHeight),
                     child: gotSomeTextYo
-                        ? Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              lst[0],
-                              style: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "productSansReg",
-                                  color: Color(0xFF009CFF)),
+                        ? Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1.5, color: const Color(0xFF009CFF)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  lastWords,
+                                  style: const TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "productSansReg",
+                                      color: Color(0xFF009CFF)),
+                                ),
+                              ),
                             ),
                           )
                         : const Padding(
@@ -150,11 +219,11 @@ class _AudioInputState extends State<AudioInput>
                   ),
                 if (isPlaying)
                   SizedBox(
-                    height: 150 * (height / deviceHeight),
+                    height: 80 * (height / deviceHeight),
                   ),
                 Container(
                   alignment: Alignment.center,
-                  height: 60 * (height / deviceHeight),
+                  height: 50 * (height / deviceHeight),
                   decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.black,
@@ -162,25 +231,36 @@ class _AudioInputState extends State<AudioInput>
                       ),
                       shape: BoxShape.circle),
                   child: GestureDetector(
-                    onTap: () async {},
+                    onTap: () async {
+                      if (recorder.isRecording) {
+                        isPlaying = false;
+                        await stop();
+                        _controller.reset();
+                      } else {
+                        isPlaying = true;
+                        await record();
+                        _controller.reset();
+                        _controller.forward();
+                      }
+                      setState(() {});
+                    },
                     child: AnimatedContainer(
                       height: isPlaying
-                          ? 25 * (height / deviceHeight)
-                          : 50 * (height / deviceHeight),
+                          ? 10 * (height / deviceHeight)
+                          : 25 * (height / deviceHeight),
                       width: isPlaying
-                          ? 25 * (height / deviceHeight)
-                          : 50 * (height / deviceHeight),
+                          ? 10 * (height / deviceHeight)
+                          : 25 * (height / deviceHeight),
                       duration: const Duration(milliseconds: 300),
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(isPlaying ? 6 : 100),
+                        borderRadius: BorderRadius.circular(isPlaying ? 6 : 60),
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 70 * (height / deviceHeight),
+                  height: 20 * (height / deviceHeight),
                 ),
               ],
             ),
@@ -188,5 +268,17 @@ class _AudioInputState extends State<AudioInput>
         ),
       ),
     );
+  }
+
+  Future<File> saveAudioPermanently(String path) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(path);
+    final audio = File('${directory.path}/$name');
+    return File(path).copy(audio.path);
+  }
+
+  _callNumber() async {
+    const number = '+91 96198 63017';
+    bool? res = await FlutterPhoneDirectCaller.callNumber(number);
   }
 }

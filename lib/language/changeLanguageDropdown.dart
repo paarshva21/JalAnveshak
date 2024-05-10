@@ -53,7 +53,7 @@ class _SelectLanguageDropdownState extends State<SelectLanguageDropdown> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        height: 300 * (height / deviceHeight),
+                        height: 200 * (height / deviceHeight),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: ModelViewer(

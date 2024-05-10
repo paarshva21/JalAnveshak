@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:jal_anveshak/constants.dart';
+
+import '../BottomBar/Chat/chatGemini/gemini.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
@@ -54,21 +58,14 @@ class _MapsState extends State<Maps> {
     if (kDebugMode) {
       print("getMarkers is entered");
     }
-    final response = await http.get(
-        Uri.parse('https://2c8e-35-237-253-119.ngrok-free.app/process_text'));
-    List data = jsonDecode(response.body);
-    if (kDebugMode) {
-      print(response.headers);
-      print(response.statusCode);
-    }
-    if (response.statusCode == 200) {
-      if (kDebugMode) {
-        print("ji");
-        print(data);
-      }
-    } else {
-      debugPrint("error!");
-    }
+
+    final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+    final content = [Content.text(Constants().prompt)];
+    final response = await model.generateContent(content);
+    print(response.text);
+    List<String> a = response.text!.trim().split(",");
+    List<double> data =
+        a.map((String item) => double.parse(item.trim())).toList();
 
     for (int i = 0; i < data.length / 2; i++) {
       _markers.add(Marker(

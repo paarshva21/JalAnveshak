@@ -37,7 +37,7 @@ class _GeminiPageState extends State<GeminiPage> {
 
   double deviceHeight = Constants().deviceHeight,
       deviceWidth = Constants().deviceWidth;
-  String promptGemini = Constants().prompt;
+  String promptGemini = Constants().promptNew;
 
   List lst1 = [];
 
@@ -175,7 +175,7 @@ class _GeminiPageState extends State<GeminiPage> {
                           color: Colors.cyan,
                         ),
                         suffix: SizedBox(
-                          width: width * (75 / deviceWidth),
+                          width: width * (150 / deviceWidth),
                           height: height * (10 / deviceHeight),
                           child: !readOnly
                               ? Row(children: [
