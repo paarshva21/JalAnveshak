@@ -38,7 +38,7 @@ class _FishPageState extends State<FishPage> {
                 DropdownMenuItem(value: 'hi', child: Text('Bombay duck')),
                 DropdownMenuItem(value: 'ar', child: Text('Surmai')),
                 DropdownMenuItem(value: 'al', child: Text('Bangda')),
-                DropdownMenuItem(value: 'ai', child: Text('')),
+                DropdownMenuItem(value: 'ai', child: Text('Bhetki')),
               ],
               style: const TextStyle(
                   fontFamily: "productSansReg",
