@@ -105,7 +105,7 @@ class _UserPageState extends State<UserPage> {
                     Icons.water,
                     color: Colors.black,
                   ),
-                  label: AppLocalizations.of(context)!.camera,
+                  label: AppLocalizations.of(context)!.display,
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(
